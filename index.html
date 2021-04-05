@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <title>:)</title>
+    </head>
+    <body>
+        :<span id="out">)</span>
+        <input type="button" onclick="plus()" value="One more pls"/>
+        <input type="button" onclick="minus()" value="One less"/>
+        <script>
+            let out = document.querySelector('#out');
+            function plus() {
+                out.innerHTML = out.innerHTML + ')';
+            }
+            function minus() {
+                out.innerHTML = out.innerHTML.substr(0, out.innerHTML.length - 1);
+            }
+        </script>
+    </body>
+</html>
