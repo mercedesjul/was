@@ -1,18 +1,22 @@
 <html>
     <head>
-        <title>:)</title>
+        <title>Was Dikka?</title>
     </head>
     <body>
-        :<span id="out">)</span>
-        <input type="button" onclick="plus()" value="One more pls"/>
-        <input type="button" onclick="minus()" value="One less"/>
+        <div style="font-size:40px;">Was Dikka?<span id="out"></span></div>
+        <input type="button" onclick="was()" value="Was"/>
+        <input type="button" onclick="dikka()" value="Dikka"/>
+        <input type="button" onclick="q()" value="q"/>
         <script>
             let out = document.querySelector('#out');
-            function plus() {
-                out.innerHTML = out.innerHTML + ')';
+            function was() {
+                out.innerHTML = out.innerHTML + ' Was';
             }
-            function minus() {
-                out.innerHTML = out.innerHTML.substr(0, out.innerHTML.length - 1);
+            function dikka() {
+                out.innerHTML = out.innerHTML + ' Dikka';
+            }
+            function q(){
+                out.innerHTML = out.innerHTML + '?';
             }
         </script>
     </body>
