@@ -57,7 +57,7 @@
             }
             function play() {
                 document.querySelectorAll('input').forEach(e => e.disabled=true);
-                stack.foreach(e => play(e));
+                stack.forEach(e => play(e));
                 document.querySelectorAll('input').forEach(e => e.disabled=false);
             }
         </script>
