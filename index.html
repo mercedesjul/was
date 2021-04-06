@@ -36,21 +36,25 @@
             }
             function was() {
                 out.innerHTML = out.innerHTML + ' Was';
+                clearEvents();
                 play('was');
                 stack.push('was');
             }
             function dikka() {
                 out.innerHTML = out.innerHTML + ' Dikka';
+                clearEvents();
                 play('dikka');
                 stack.push('dikka');
             }
             function diikkaaah() {
                 out.innerHTML = out.innerHTML + ' Dikkaaah';
+                clearEvents();
                 play('diikkaaah');
                 stack.push('diikkaaah');
             }
             function dikah() {
                 out.innerHTML = out.innerHTML + ' Dikah';
+                clearEvents();
                 play('dikah');
                 stack.push('dikah');
             }
@@ -72,6 +76,9 @@
                 stack = [];
                 document.querySelectorAll('audio').forEach(e=>{e.removeEventListener('ended', playAll);e.pause();e.currentTime = 0;})
           
+            }
+            clearEvents() {
+                document.querySelectorAll('audio').forEach(e=>e.removeEventListener('ended', playAll))
             }
         </script>
     </body>
