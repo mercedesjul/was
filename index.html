@@ -1,12 +1,19 @@
 <html>
     <head>
         <title>Was Dikka?</title>
+        <style>
+            input{
+                background-color: rgba(255, 0, 0, 0.62);
+                border: none;
+                border-radius: 12px;
+            }
+        </style>
     </head>
     <body>
         <div style="font-size:40px;">Was Dikka?<span id="out"></span></div>
         <input type="button" onclick="was()" value="Was"/>
         <input type="button" onclick="dikka()" value="Dikka"/>
-        <input type="button" onclick="q()" value="q"/>
+        <input type="button" onclick="q()" value="?"/>
         <script>
             let out = document.querySelector('#out');
             function was() {
