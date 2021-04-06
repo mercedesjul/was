@@ -130,6 +130,9 @@
                 audio.play();
             }
             function button(string) {
+                for(audio of audios) {
+                    audio.load();
+                }
                 out.innerHTML = out.innerHTML + ' <span class="out_span" id="' + current + '_out"> '+ string[0].toUpperCase() + string.substr(1) + '</span>';
                 clearEvents();
                 play(string);
