@@ -13,23 +13,52 @@
     </head>
     <body>
         <div style="font-size:40px;">Was Dikka?<span id="out"></span></div>
+        <audio id="diikkaaah" src="diikkaaah.ogg"></audio>
+        <audio id="dikah" src="dikah.ogg"></audio>
         <audio id="dikka" src="dikka.ogg"></audio>
         <audio id="was" src="was.ogg"></audio>
         <input type="button" onclick="was()" value="Was"/>
         <input type="button" onclick="dikka()" value="Dikka"/>
+        <input type="button" onclick="diikkaaah()" value="Dikkaaah"/>
+        <input type="button" onclick="dikah()" value="Dikah"/>
         <input type="button" onclick="q()" value="?"/>
+        <input type="button" onclick="play()" value="Play"/>
         <script>
+            let stack = [];
             let out = document.querySelector('#out');
+            function play(s) {
+                let audio = document.getElementById(s);
+                audio.pause();
+                audio.currentTime = 0;
+                audio.play();
+            }
             function was() {
                 out.innerHTML = out.innerHTML + ' Was';
-                document.getElementById('was').play()
+                play('was');
+                stack.push('was');
             }
             function dikka() {
                 out.innerHTML = out.innerHTML + ' Dikka';
-                document.getElementById('dikka').play()
+                play('dikka');
+                stack.push('dikka');
+            }
+            function diikkaaah() {
+                out.innerHTML = out.innerHTML + ' Dikkaaah';
+                play('diikkaaah');
+                stack.push('diikkaaah');
+            }
+            function dikah() {
+                out.innerHTML = out.innerHTML + ' Dikah';
+                play('dikah');
+                stack.push('dikah');
             }
             function q(){
                 out.innerHTML = out.innerHTML + '?';
+            }
+            function play() {
+                document.querySelectorAll('input').forEach(e => e.disabled=true);
+                stack.foreach(e => play(e));
+                document.querySelectorAll('input').forEach(e => e.disabled=false);
             }
         </script>
     </body>
