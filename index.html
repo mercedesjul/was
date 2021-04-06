@@ -57,7 +57,7 @@
             }
             function playAll() {
                 document.querySelectorAll('input').forEach(e => e.disabled=true);
-                stack.forEach(e => play(e);setTimeout(true, document.getElementById('#' + e).duration));
+                stack.forEach(e => {play(e);setTimeout(true, document.getElementById('#' + e).duration);});
                 document.querySelectorAll('input').forEach(e => e.disabled=false);
             }
         </script>
