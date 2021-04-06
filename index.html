@@ -2,30 +2,84 @@
     <head>
         <title>Was Dikka?</title>
         <style>
+            * {
+                font-family: 'Times New Roman', Times, serif;
+            }
             input{
                 background-color: rgba(255, 0, 0, 0.62);
                 border: solid black;
                 border-radius: 12px;
                 font-size: 50px;
                 box-shadow: 5px 5px;
+                margin: 10px;
+                flex-grow: 1;
+                outline: 0;
+            }
+            body {
+                margin: 0;
+            }
+            h1 {
+                text-align: center;
+                font-size: 48px;
+                margin: 0;
+                padding: 30px;
+            }
+            .title{
+                background-color: rgba(37, 194, 128, 0.76);
+                border: 1px solid black;
+            }
+            .inputs, .controls{
+                margin: 10px 25px;
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                background-color: darkgrey;
+                border-radius: 12px;
+            }
+            .buttons {
+                padding: 10px;
+                background-color: grey;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
+            .out_container {
+                margin: 50px 30px;
+                font-size: 48px;
+            }
+            #out{
+                background-color: #faebd7;
+                padding: 10px;
+            }
+            .active {
+                background-color: #c5ad8e;
+                text-decoration: underline;
             }
         </style>
     </head>
     <body>
-        <div style="font-size:40px;">Was Dikka?<span id="out"></span></div>
+        <div class="title"><h1>Was Dikka?</h1></div>
+        <div class="out_container"><span id="out"></span></div>
         <audio id="diikkaaah" src="diikkaaah.ogg"></audio>
         <audio id="dikah" src="dikah.ogg"></audio>
         <audio id="dikka" src="dikka.ogg"></audio>
         <audio id="was" src="was.ogg"></audio>
-        <input type="button" onclick="was()" value="Was"/>
-        <input type="button" onclick="dikka()" value="Dikka"/>
-        <input type="button" onclick="diikkaaah()" value="Dikkaaah"/>
-        <input type="button" onclick="dikah()" value="Dikah"/>
-        <input type="button" onclick="q()" value="?"/>
-        <input type="button" onclick="playAll()" value="Play"/>
-        <input type="button" onclick="del()" value="Reset"/>
+        <div class="buttons">
+            <div class="inputs">
+                <input type="button" onclick="button('was')" value="Was"/>
+                <input type="button" onclick="button('dikka')" value="Dikka"/>
+                <input type="button" onclick="button('diikkaaah')" value="Dikkaaah"/>
+                <input type="button" onclick="button('dikah')" value="Dikah"/>
+                <input type="button" onclick="q()" value="?"/>
+            </div>
+            <div class="controls">
+                <input type="button" onclick="playAll()" value="Play"/>
+                <input type="button" onclick="del()" value="Reset"/>
+            </div>
+        </div>
         <script>
             let i = -1;
+            let current = 0;
             let stack = [];
             let out = document.querySelector('#out');
             function play(s) {
@@ -34,40 +88,30 @@
                 audio.currentTime = 0;
                 audio.play();
             }
-            function was() {
-                out.innerHTML = out.innerHTML + ' Was';
+            function button(string) {
+                out.innerHTML = out.innerHTML + ' <span class="out_span" id="' + current + '_out"> '+ string[0].toUpperCase() + string.substr(1) + '</span>';
                 clearEvents();
-                play('was');
-                stack.push('was');
-            }
-            function dikka() {
-                out.innerHTML = out.innerHTML + ' Dikka';
-                clearEvents();
-                play('dikka');
-                stack.push('dikka');
-            }
-            function diikkaaah() {
-                out.innerHTML = out.innerHTML + ' Dikkaaah';
-                clearEvents();
-                play('diikkaaah');
-                stack.push('diikkaaah');
-            }
-            function dikah() {
-                out.innerHTML = out.innerHTML + ' Dikah';
-                clearEvents();
-                play('dikah');
-                stack.push('dikah');
+                play(string);
+                stack.push(string);
+                current++;
             }
             function q(){
                 out.innerHTML = out.innerHTML + '?';
             }
             function playAll() {
+                let old_text = document.getElementById(i + '_out');
+                if (old_text !== null){
+                    old_text.className = '';
+                }
                 i++;
-                a = document.getElementById(stack[i]);
-                if(a === null) {
+                let text = document.getElementById(i + '_out');
+                if (text === null) {
+                    current = 0;
                     i = -1;
                     return;
                 }
+                text.className = "active";
+                a = document.getElementById(stack[i]);
                 a.addEventListener('ended', playAll);
                 a.play();
             }
