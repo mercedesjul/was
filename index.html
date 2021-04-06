@@ -22,7 +22,7 @@
         <input type="button" onclick="diikkaaah()" value="Dikkaaah"/>
         <input type="button" onclick="dikah()" value="Dikah"/>
         <input type="button" onclick="q()" value="?"/>
-        <input type="button" onclick="play()" value="Play"/>
+        <input type="button" onclick="playAll()" value="Play"/>
         <script>
             let stack = [];
             let out = document.querySelector('#out');
@@ -55,7 +55,7 @@
             function q(){
                 out.innerHTML = out.innerHTML + '?';
             }
-            function play() {
+            function playAll() {
                 document.querySelectorAll('input').forEach(e => e.disabled=true);
                 stack.forEach(e => play(e));
                 document.querySelectorAll('input').forEach(e => e.disabled=false);
