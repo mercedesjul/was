@@ -116,8 +116,15 @@
             let current = 0;
             let stack = [];
             let out = document.querySelector('#out');
+            let audios = {
+
+            };
+            document.querySelectorAll('audio').forEach((e, i) => {
+                audios[e.id] = e;
+            })
             function play(s) {
-                let audio = document.getElementById(s);
+                audio = audios[s];
+                audio.load();
                 audio.pause();
                 audio.currentTime = 0;
                 audio.play();
