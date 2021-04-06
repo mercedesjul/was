@@ -13,6 +13,8 @@
     </head>
     <body>
         <div style="font-size:40px;">Was Dikka?<span id="out"></span></div>
+        <audio id="dikka" src="dikka.ogg"></audio>
+        <audio id="was" src="was.ogg"></audio>
         <input type="button" onclick="was()" value="Was"/>
         <input type="button" onclick="dikka()" value="Dikka"/>
         <input type="button" onclick="q()" value="?"/>
@@ -20,9 +22,11 @@
             let out = document.querySelector('#out');
             function was() {
                 out.innerHTML = out.innerHTML + ' Was';
+                document.getElementById('was').play()
             }
             function dikka() {
                 out.innerHTML = out.innerHTML + ' Dikka';
+                document.getElementById('dikka').play()
             }
             function q(){
                 out.innerHTML = out.innerHTML + '?';
