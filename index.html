@@ -64,7 +64,7 @@
                 document.querySelectorAll('input').forEach(e => e.disabled=false);
             }
             function allHelper(a, i){
-                a.addEventListener('ended', allHelper(stack([i + 1], i++));
+                a.addEventListener('ended', allHelper(document.getElementById(stack[i + 1]), i++));
                 a.play();
             }
         </script>
