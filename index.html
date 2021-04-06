@@ -58,8 +58,11 @@
             }
             function playAll() {
                 i++;
-                if (i == stack.length) return;
                 a = document.getElementById(stack[i]);
+                if(a === undefiend) {
+                    i = -1;
+                    return;
+                }
                 a.addEventListener('ended', playAll);
                 a.play();
             }
