@@ -57,7 +57,7 @@
                 out.innerHTML = out.innerHTML + '?';
             }
             function playAll() {
-                a = document.getElemnetById(stack[i]);
+                a = document.getElementById(stack[i]);
                 i++;
                 a.addEventListener('ended', playAll);
                 a.play();
