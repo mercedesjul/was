@@ -58,7 +58,7 @@
             }
             function playAll() {
                 i++;
-                if (i == sounds.length) return;
+                if (i == stack.length) return;
                 a = document.getElementById(stack[i]);
                 a.addEventListener('ended', playAll);
                 a.play();
