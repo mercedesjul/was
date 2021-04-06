@@ -77,7 +77,7 @@
                 document.querySelectorAll('audio').forEach(e=>{e.removeEventListener('ended', playAll);e.pause();e.currentTime = 0;})
           
             }
-            clearEvents() {
+            function clearEvents() {
                 document.querySelectorAll('audio').forEach(e=>e.removeEventListener('ended', playAll))
             }
         </script>
