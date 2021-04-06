@@ -52,8 +52,6 @@
             .out_container {
                 margin: 50px 30px;
                 font-size: 48px;
-            }
-            #out{
                 background-color: #faebd7;
                 padding: 10px;
             }
@@ -61,15 +59,29 @@
                 background-color: #c5ad8e;
                 text-decoration: underline;
             }
-            .out_container{
+            .curser{
+                animation: animated-cursor 800ms steps(29,end) infinite;
                 text-align: center;
                 line-height: 1.7em;
+                border-right: solid 3px rgba(0,255,0,.75);
+                white-space: nowrap;
+                overflow: hidden;    
+                font-family: 'Source Code Pro', monospace;  
+                font-size: 48px;
+                color: rgba(255,255,255,.70);
+            }
+
+            /* cursor animations */
+
+            @keyframes animated-cursor{
+                from{border-right-color: rgba(0, 0, 0, 1);}
+                to{border-right-color: transparent;}
             }
         </style>
     </head>
     <body>
         <div class="title"><h1>Was Dikka?</h1></div>
-        <div class="out_container"><span id="out"></span></div>
+        <div class="out_container"><span id="out"></span><span class="curser"></span></div>
         <audio id="diikkaaah" src="diikkaaah.ogg"></audio>
         <audio id="dikah" src="dikah.ogg"></audio>
         <audio id="dikka" src="dikka.ogg"></audio>
