@@ -24,6 +24,7 @@
         <input type="button" onclick="q()" value="?"/>
         <input type="button" onclick="playAll()" value="Play"/>
         <script>
+            let i = 0;
             let stack = [];
             let out = document.querySelector('#out');
             function play(s) {
@@ -56,15 +57,9 @@
                 out.innerHTML = out.innerHTML + '?';
             }
             function playAll() {
-
-                document.querySelectorAll('input').forEach(e => e.disabled=true);
-                i = 0;
-                a = document.getElementById(stack[0]);
-                a.addEventListener('ended', allHelper(stack[i + 1], i));
-                document.querySelectorAll('input').forEach(e => e.disabled=false);
-            }
-            function allHelper(a, i){
-                a.addEventListener('ended', allHelper(document.getElementById(stack[i + 1]), i++));
+                a = document.getElemnetById(stack[i]);
+                i++;
+                a.addEventListener('ended', playAll);
                 a.play();
             }
         </script>
