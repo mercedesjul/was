@@ -24,6 +24,8 @@
             }
             body {
                 margin: 0;
+                height: 100vh;
+                overflow: hidden;
             }
             h1 {
                 text-align: center;
@@ -49,8 +51,9 @@
             .controls {
                 flex-grow: 1;
             }
-            .buttons {
+            .buttons, .overlay{
                 box-sizing: border-box;
+                flex-grow: 1;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
@@ -60,6 +63,9 @@
                 bottom: 0;
                 width: 100%;
                 min-height: 40vh;
+            }
+            .overlay{
+                z-index: 10;
             }
             .out_container {
                 margin: 50px 30px;
@@ -82,7 +88,9 @@
                 font-size: 48px;
                 color: rgba(255,255,255,.70);
             }
-
+            .hidden {
+                display: none;
+            }
             /* cursor animations */
 
             @keyframes animated-cursor{
@@ -94,21 +102,23 @@
     <body>
         <div class="title"><h1>Was Dikka?</h1></div>
         <div class="out_container"><span id="out"></span><span class="curser"></span></div>
-        <audio id="diikkaaah" src="diikkaaah.ogg"></audio>
-        <audio id="dikah" src="dikah.ogg"></audio>
-        <audio id="dikka" src="dikka.ogg"></audio>
-        <audio id="was" src="was.ogg"></audio>
+        <div class="overlay"><div class="inputs"><input type="button" value="START!" onclick="initsound()"/></div></div>
         <div class="buttons">
             <div class="inputs">
                 <input type="button" onclick="button('was')" value="Was"/>
                 <input type="button" onclick="button('dikka')" value="Dikka"/>
-                <input type="button" onclick="button('diikkaaah')" value="Dikkaaah"/>
                 <input type="button" onclick="button('dikah')" value="Dikah"/>
+                <input type="button" onclick="button('diikkaaah')" value="Dikkaaah"/>
+                <input type="button" onclick="button('painochocolate')" value="painochocolate"/>
+                <input type="button" onclick="button('inhale', '*inhale*')" value="*inhale*"/>
+                <input type="button" onclick="button('u_want_some', 'U want some')" value="U want some"/>
+                <input type="button" onclick="button('ey')" value="Ey"/>
                 <input type="button" onclick="q()" value="?"/>
             </div>
             <div class="controls">
                 <input type="button" onclick="playAll()" value="Play"/>
                 <input type="button" onclick="del()" value="Reset"/>
+                <input type="button" onclick="back()" value="Back"/>
             </div>
         </div>
         <script>
@@ -116,27 +126,36 @@
             let current = 0;
             let stack = [];
             let out = document.querySelector('#out');
+            let audio;
+            let inited = false;
             let audios = {
-
+                'diikkaaah': 'diikkaaah.ogg',
+                'was': 'was.ogg',
+                'dikka': 'dikka.ogg',
+                'dikah': 'dikah.ogg',
+                'painochocolate': 'painochocolate.ogg',
+                'inhale': 'inhale.ogg',
+                'u_want_some': 'u_want_some.ogg',
+                'ey': 'ey.ogg',
             };
-            document.querySelectorAll('audio').forEach((e, i) => {
-                audios[e.id] = e;
-            })
+            function initsound(){
+                if (!inited) {
+                    audio = new Audio();
+                    audio.play();
+                    inited = true;
+                    document.querySelector('.overlay').className = 'hidden';
+                }
+            }
             function play(s) {
-                audio = audios[s];
-                audio.load();
-                audio.pause();
+                audio.src = audios[s];
                 audio.currentTime = 0;
                 audio.play();
             }
-            function button(string) {
-                for(audio in audios) {
-                    audios[audio].load();
-                }
-                out.innerHTML = out.innerHTML + ' <span class="out_span" id="' + current + '_out"> '+ string[0].toUpperCase() + string.substr(1) + '</span>';
-                clearEvents();
-                play(string);
-                stack.push(string);
+            function button(id, text) {
+                out.innerHTML = out.innerHTML + ' <span class="out_span" id="' + current + '_out"> '+ (text ? text : id)[0].toUpperCase() + (text ? text : id).substr(1) + '</span>';
+                clearEvent();
+                play(id);
+                stack.push(id);
                 current++;
             }
             function q(){
@@ -153,20 +172,23 @@
                     i = -1;
                     return;
                 }
+
+                audio.src = audios[stack[i]];
                 text.className = "active";
-                a = document.getElementById(stack[i]);
-                a.addEventListener('ended', playAll);
-                a.play();
+                audio.addEventListener('ended', playAll);
+                audio.play();
             }
             function del(){
                 out.innerText = '';
                 stack = [];
                 current = 0;
-                document.querySelectorAll('audio').forEach(e=>{e.removeEventListener('ended', playAll);e.pause();e.currentTime = 0;})
+                audio.removeEventListener('ended', playAll);
+                audio.pause();
+                audio.currentTime = 0;
           
             }
-            function clearEvents() {
-                document.querySelectorAll('audio').forEach(e=>e.removeEventListener('ended', playAll))
+            function clearEvent() {
+                audio.removeEventListener('ended', playAll);
             }
         </script>
     </body>
